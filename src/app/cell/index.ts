@@ -1,1 +1,1 @@
-export { CellComponent } from './cell.component';
+export {CellComponent} from './cell.component';
