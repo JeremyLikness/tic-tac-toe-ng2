@@ -17,11 +17,17 @@ describe('Bad Turn Service', () => {
        for (let idx = 0; idx < service.quotes.length; idx += 1) {
          test[service.quotes[idx]] = false;
        }
-       let i = 100;
-       while (i > 0) {
+
+       let i = 1000, done = false;
+       while (i > 0 && !done) {
          test[service.getBadTurn()] = true;
+         done = true;
+         for (let quoteTest in test) {
+           done = done && test[quoteTest];
+         }
          i -= 1;
        }
+
        for (let quoteTest in test) {
          expect(test[quoteTest]).toBe(true);
        }

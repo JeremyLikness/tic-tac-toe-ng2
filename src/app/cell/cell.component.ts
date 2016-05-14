@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
+import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from '@angular/core';
 import {BadTurnService} from '../bad-turn.service';
 import {QuotesService} from '../quotes.service';
 import {State} from '../matrix.service';
@@ -10,7 +10,8 @@ import {State} from '../matrix.service';
   styleUrls: ['cell.component.css'],
   providers: [BadTurnService, QuotesService]
 })
-export class CellComponent implements OnInit {
+export class CellComponent implements OnInit,
+    OnChanges {
   private static _counter: number = 1;
 
   public id: number;
@@ -33,6 +34,12 @@ export class CellComponent implements OnInit {
 
   ngOnInit() { this.cellQuote = this.quoteService.getQuote(); }
 
+  ngOnChanges() {
+    if (Math.random() < 0.5) {
+      this.cellQuote = this.quoteService.getQuote();
+    }
+  }
+
   public get cellText(): string {
     if (this.cellState == State.O) {
       return "O";
@@ -54,7 +61,6 @@ export class CellComponent implements OnInit {
         this.stateChangeRequested.emit(true);
       } else {
         this.cellQuote = this.badTurn.getBadTurn();
-        setTimeout(() => this.cellQuote = this.quoteService.getQuote(), 2000);
       }
     }
   }

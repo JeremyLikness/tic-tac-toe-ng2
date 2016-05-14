@@ -25,5 +25,5 @@ export class QuotesService {
 
       constructor() {}
 
-  public getQuote(): string { return this.quotes[Math.floor(Math.random() * this.quotes.length)]; }
+  public getQuote(): string { return this.quotes.sort(() => 0.5 - Math.random())[0]; }
 }

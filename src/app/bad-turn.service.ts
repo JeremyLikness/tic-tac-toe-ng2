@@ -14,7 +14,5 @@ export class BadTurnService {
 
       constructor() {}
 
-  public getBadTurn(): string {
-    return this.quotes[Math.floor(Math.random() * this.quotes.length)];
-  }
+  public getBadTurn(): string { return this.quotes.sort(() => 0.5 - Math.random())[0]; }
 }

@@ -7,8 +7,8 @@ describe('tic-tac-toe-ng2 App', function() {
     page = new TicTacToeNg2Page();
   })
 
-  it('should display message saying app works', () => {
+  it('should display the title', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('tic-tac-toe-ng2 works!');
+    expect(page.getParagraphText()).toEqual('Welcome to Angular 2 Tic-Tac-Toe!');
   });
 });

@@ -19,6 +19,8 @@ export class TicTacToeNg2AppComponent implements OnInit {
   public won: boolean;
   public computerWon: boolean;
   public draw: boolean;
+  public slowComputer: boolean = true;
+  private execComputerMove: () => void;
 
   public get easyMode(): boolean { return this.strategy && this.strategy.easyMode; }
 
@@ -27,10 +29,17 @@ export class TicTacToeNg2AppComponent implements OnInit {
   constructor(private matrix: MatrixService, private strategy: StrategyService) {
     this.rows = matrix.rows;
     this.youAreX = matrix.computerTurn === GameState.OTurn;
-    this.updateStats();
   }
 
-  ngOnInit(): void { this.updateStats(); }
+  ngOnInit(): void {
+    if (this.slowComputer) {
+      this.execComputerMove = () =>
+          setTimeout(() => this.computerMove(), Math.random() * 5000 + 500);
+    } else {
+      this.execComputerMove = () => this.computerMove();
+    }
+    this.updateStats();
+  }
 
   private updateStats(): void {
     this.yourTurn = this.matrix.gameState !== GameState.Won &&
@@ -40,12 +49,12 @@ export class TicTacToeNg2AppComponent implements OnInit {
     this.computerWon = this.matrix.computerWon;
     this.draw = this.matrix.gameState === GameState.Draw;
     if (!this.yourTurn) {
-      setTimeout(() => this.computerMove(), Math.random() * 5000 + 500);
+      this.execComputerMove();
     }
   }
 
-  public stateChange(col: ICell) {
-    col.state = this.matrix.gameState === GameState.XTurn ? State.X : State.O;
+  public stateChange(cell: ICell) {
+    cell.state = this.matrix.gameState === GameState.XTurn ? State.X : State.O;
     this.matrix.advanceBoardState();
     this.updateStats();
   }
