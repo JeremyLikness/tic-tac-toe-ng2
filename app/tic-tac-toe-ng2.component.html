@@ -1,0 +1,17 @@
+<h1>
+  {{title}}
+</h1>
+<button (click)="reset()">New Game</button>
+<h3 [style.color]="easyMode ? 'green' : 'red'"
+    [innerText]="(easyMode ? 'Easy Mode' : 'Difficult Mode') + '(Click to Change)'"
+    (click)="easyMode = !easyMode"></h3>
+<h2 *ngIf="won && computerWon">The Computer Won.</h2>
+<h2 *ngIf="won && !computerWon">You Win!!!</h2>
+<h2 *ngIf="draw">Game was a Draw.</h2> 
+<h2 *ngIf="yourTurn">Your Turn (You are <span [innerText]="youAreX ? 'X' : 'O'"></span>)</h2>
+<h2 *ngIf="!won && !draw && !yourTurn">Computer's Turn</h2>
+<div *ngFor="let row of rows">
+  <cell *ngFor="let col of row" [row]="col.row" [col]="col.col" [cellState]="col.state"
+    [validTurn]="yourTurn" [winningCell]="col.winningCell"
+    (stateChangeRequested)="stateChange(col)"></cell>
+</div>

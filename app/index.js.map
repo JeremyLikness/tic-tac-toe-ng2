@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["index.ts"],"names":[],"mappings":";AAAA,4BAA0B,eAAe,CAAC;AAAlC,gDAAkC;AAC1C,0CAAuC,6BAA6B,CAAC;AAA7D,wFAA6D","sourcesContent":["export {environment} from './environment';\r\nexport {TicTacToeNg2AppComponent} from './tic-tac-toe-ng2.component';\r\n"]}

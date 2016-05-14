@@ -1,0 +1,9 @@
+<div [style.font-size]="cellState === 0 ? '1.0em' : '10.0em'"
+     [style.color]="cellState === 1 ? 'red' : 'black'"
+     [style.cursor]="cellState === 0 ? 'pointer' : 'not-allowed'"
+     (mouseover)="backgroundColor='gray'"
+     (mouseout)="backgroundColor='white'"
+     [style.background]="winningCell ? 'green' : backgroundColor || 'white'"
+     (click)="set()">
+    {{cellText}}
+</div>
